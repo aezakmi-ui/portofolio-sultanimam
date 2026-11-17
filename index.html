@@ -1,268 +1,647 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0d12">
-  <meta name="description" content="Portofolio profesional di bidang operasional mesin vacuum metalizer, manufaktur, dan proyek jaringan internet desa.">
-  <title>Portfolio — Muhammad Sultan Imam</title>
-  <style>
-    :root {
-      --bg: #0b0d12;
-      --surface: #11151d;
-      --surface-2: #171d28;
-      --text: #f3f5f8;
-      --muted: #9aa5b5;
-      --line: rgba(255,255,255,.09);
-      --accent: #9bdbff;
-      --accent-2: #b5a4ff;
-      --radius: 22px;
-      --max: 1120px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6; overflow-x: hidden;
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-      background: radial-gradient(ellipse at 80% 5%, rgba(115,135,255,.12), transparent 34%),
-                  radial-gradient(ellipse at 10% 40%, rgba(91,205,255,.07), transparent 32%);
-    }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    .wrap { width: min(var(--max), calc(100% - 44px)); margin-inline: auto; }
-    .topbar {
-      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px);
-      background: rgba(11,13,18,.72); border-bottom: 1px solid var(--line);
-    }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { font-size: 1rem; font-weight: 800; letter-spacing: -.04em; }
-    .brand span { color: var(--accent); }
-    .nav-links { display: flex; align-items: center; gap: 8px; }
-    .nav-links a {
-      color: var(--muted); padding: 9px 13px; border-radius: 999px; font-size: .9rem;
-      transition: color .25s, background .25s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(255,255,255,.07); }
-    .menu-btn { display: none; border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 12px; padding: 9px 12px; }
-    main { min-height: 75vh; }
-    .page { display: none; padding: 86px 0 100px; animation: pageIn .55s cubic-bezier(.2,.75,.25,1) both; }
-    .page.active { display: block; }
-    @keyframes pageIn { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-    .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    h1,h2,h3,p { margin-top: 0; }
-    h1 { font-size: clamp(2.8rem, 7vw, 5.7rem); line-height: 1.02; letter-spacing: -.07em; max-width: 850px; margin: 20px 0 24px; }
-    h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.055em; line-height: 1.1; margin: 12px 0 18px; }
-    h3 { letter-spacing: -.025em; margin-bottom: 9px; }
-    .gradient { background: linear-gradient(100deg, #f4f7fb 15%, #9bdbff 55%, #b5a4ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .lead { max-width: 650px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.18rem); }
-    .hero { min-height: 65vh; display: flex; flex-direction: column; justify-content: center; }
-    .hero-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 13px 19px; font-weight: 700; font-size: .92rem; transition: transform .25s, background .25s, border-color .25s; }
-    .btn:hover { transform: translateY(-3px); }
-    .btn-primary { color: #081019; background: var(--accent); }
-    .btn-ghost { border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.025); }
-    .meta-row { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 58px; color: var(--muted); font-size: .88rem; }
-    .meta-row strong { display: block; color: var(--text); font-size: 1rem; }
-    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 25px; margin-bottom: 34px; }
-    .section-head p { max-width: 430px; color: var(--muted); margin-bottom: 4px; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
-    .card { background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018)); border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; transition: transform .3s, border-color .3s, background .3s; }
-    .card:hover { transform: translateY(-5px); border-color: rgba(155,219,255,.35); background: linear-gradient(145deg, rgba(155,219,255,.08), rgba(255,255,255,.02)); }
-    .card-top { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 28px; }
-    .icon-box { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid var(--line); background: rgba(255,255,255,.04); border-radius: 14px; font-size: 1.2rem; }
-    .tag { color: var(--accent); background: rgba(155,219,255,.08); border: 1px solid rgba(155,219,255,.14); border-radius: 999px; padding: 5px 10px; font-size: .72rem; white-space: nowrap; }
-    .card p { color: var(--muted); margin-bottom: 18px; font-size: .94rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
-    .tags span { color: #b9c2d0; background: rgba(255,255,255,.055); padding: 5px 9px; border-radius: 7px; font-size: .75rem; }
-    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
-    .about-copy { padding: 32px; }
-    .about-copy p { color: var(--muted); }
-    .skill-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
-    .skill-list span { border: 1px solid var(--line); padding: 9px 13px; border-radius: 999px; color: #d3d9e3; font-size: .85rem; }
-    .info-list { display: grid; gap: 0; }
-    .info-item { padding: 18px 0; border-bottom: 1px solid var(--line); }
-    .info-item:last-child { border-bottom: 0; }
-    .info-item small { color: var(--muted); display: block; margin-bottom: 4px; }
-    .contact-panel { padding: clamp(28px, 6vw, 58px); text-align: center; }
-    .contact-panel .lead { margin-inline: auto; }
-    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-    footer { border-top: 1px solid var(--line); padding: 26px 0; color: var(--muted); font-size: .82rem; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
-    .muted { color: var(--muted); }
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 32px, var(--max)); }
-      .nav { min-height: 68px; }
-      .menu-btn { display: block; }
-      .nav-links { display: none; position: absolute; top: 68px; left: 16px; right: 16px; padding: 10px; flex-direction: column; align-items: stretch; background: #141923; border: 1px solid var(--line); border-radius: 16px; }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 14px; }
-      .page { padding: 62px 0 76px; }
-      .hero { min-height: 68vh; }
-      .grid, .about-grid { grid-template-columns: 1fr; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 12px; }
-      .meta-row { margin-top: 40px; gap: 20px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    }
-  </style>
-</head>
-<body>
-  <header class="topbar">
-    <div class="wrap nav">
-      <a class="brand" href="#home" aria-label="Beranda">PORTO<span>FOLIO.</span></a>
-      <button class="menu-btn" id="menuBtn" aria-label="Buka navigasi" aria-expanded="false">☰</button>
-      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
-        <a href="#home" class="active">Beranda</a>
-        <a href="#about">Tentang</a>
-        <a href="#projects">Proyek</a>
-        <a href="#contact">Kontak</a>
-      </nav>
-    </div>
-  </header>
+<!-- saved from url=(0091)https://metalizer-portfolio-%2D9zwog9qc.preview.emergentagent.com/portfolio-standalone.html -->
+<html lang="id"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+  ============================================================
+  PORTOFOLIO MUHAMMAD SULTAN IMAM — VERSI SATU FILE (STANDALONE)
+  ============================================================
+  PANDUAN SINGKAT UNTUK ANDA:
 
-  <main class="wrap">
-    <section class="page active" id="home">
-      <div class="hero">
-        <span class="eyebrow">Professional portfolio · 2026</span>
-        <h1>Menghubungkan <span class="gradient">operasional, teknologi, dan konektivitas.</span></h1>
-        <p class="lead">Halo, saya <strong>Muhammad Sultan Imam</strong>. Saat ini saya bekerja sebagai operator mesin metalize di industri manufaktur dan pernah berkontribusi dalam proyek pengembangan layanan internet untuk masyarakat desa.</p>
-        <div class="hero-bottom">
-          <a class="btn btn-primary" href="#projects">Lihat proyek <span>↗</span></a>
-          <a class="btn btn-ghost" href="#contact">Hubungi saya</a>
+  1) MENGEDIT: buka file ini dengan text editor (Notepad atau VS
+     Code). Cari tulisan "GANTI DI SINI" — di situ ada nama,
+     email, dan nomor WhatsApp Anda. Klik Ctrl+S untuk simpan.
+
+  2) MENGGANTI FOTO: simpan foto Anda di folder yang sama dengan
+     file ini (contoh: foto-kerja.jpg), lalu ganti alamat gambar
+     di bagian <img src="..."> sesuai nama file foto tersebut.
+
+  3) PUBLISH: upload file index.html ini ke hosting pilihan Anda
+     (Netlify Drop / Vercel / GitHub Pages / cPanel hosting).
+     Untuk domain sendiri: sambungkan domain Anda di pengaturan
+     hosting tersebut (biasanya bernama "Custom Domain").
+
+  Catatan: foto saat ini masih foto contoh dari internet (unsplash).
+  ============================================================
+-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammad Sultan Imam — Operator Metalizer &amp; ISP Desa</title>
+<meta name="description" content="Portofolio Operator Metalizer berpengalaman 7 tahun serta kontributor proyek ISP desa.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FBF9F5'/%3E%3Ccircle cx='8' cy='16' r='3.4' fill='%23D95A2B'/%3E%3Cpath d='M14.4 16H26' stroke='%23141413' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M14 12.2 L25.4 7.8' stroke='%23141413' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M14 19.8 L25.4 24.2' stroke='%23141413' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Muhammad Sultan Imam — Operator Metalizer &amp; ISP Desa_files/css2" rel="stylesheet">
+
+<style>
+  /* ============ WARNA & DASAR — GANTI DI SINI jika ingin ubah warna ============ */
+  :root {
+    --paper: #FBF9F5;      /* latar kertas hangat */
+    --cardalt: #F3F0EA;    /* latar kartu alternatif */
+    --ink: #141413;        /* warna teks utama */
+    --ink2: #52514E;       /* teks kedua */
+    --ink3: #8C8A84;       /* teks redup */
+    --molten: #D95A2B;     /* aksen oranye logam cair */
+    --molten2: #B8451B;    /* aksen saat hover */
+    --hairline: #E4E0D7;   /* garis tipis */
+    --dark: #1A1A18;       /* bagian gelap */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background: var(--paper); color: var(--ink);
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  ::selection { background: var(--molten); color: var(--paper); }
+  section[id] { scroll-margin-top: 80px; }
+
+  .display { font-family: "Syne", sans-serif; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+
+  /* butiran halus di seluruh halaman */
+  .grain::after {
+    content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ NAVIGASI ============ */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    background: rgba(251, 249, 245, .78); border-bottom: 1px solid var(--hairline);
+  }
+  .nav { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+  .brand svg { transition: transform .3s ease; }
+  .brand:hover svg { transform: rotate(90deg); }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a.nav-item { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); transition: color .3s; }
+  .nav-links a.nav-item:hover { color: var(--molten); }
+  .btn-molten {
+    display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase; background: var(--molten); color: var(--paper);
+    padding: 11px 18px; border-radius: 999px; transition: background .3s; border: none; cursor: pointer;
+  }
+  .btn-molten:hover { background: var(--molten2); }
+  .btn-ghost {
+    display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--hairline);
+    padding: 12px 24px; border-radius: 999px; transition: border-color .3s, color .3s;
+  }
+  .btn-ghost:hover { border-color: var(--molten); color: var(--molten); }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--ink); padding: 8px; }
+  .drawer { display: none; overflow: hidden; background: var(--paper); border-bottom: 1px solid var(--hairline); max-height: 0; transition: max-height .35s ease; }
+  .drawer.open { max-height: 260px; }
+  .drawer .wrap { display: flex; flex-direction: column; gap: 16px; padding-top: 16px; padding-bottom: 20px; }
+  .drawer a { font-family: "Syne", sans-serif; font-weight: 700; font-size: 18px; }
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .drawer { display: block; }
+  }
+
+  /* ============ HERO ============ */
+  .hero { padding: 118px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: center; }
+  .hero-left { grid-column: span 7; }
+  .hero-right { grid-column: span 5; }
+  @media (max-width: 860px) { .hero-left, .hero-right { grid-column: span 12; } .hero { padding-top: 100px; } }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px;
+    border: 1px solid rgba(217, 90, 43, .3); background: rgba(217, 90, 43, .1); margin-bottom: 26px;
+  }
+  .chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--molten); }
+  .chip span { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--molten); }
+  h1.hero-title {
+    font-family: "Syne", sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.02;
+    font-size: clamp(2.2rem, 4.5vw, 3.7rem);
+  }
+  .mask-line { display: block; overflow: hidden; }
+  .mask-line > span { display: block; transform: translateY(115%); animation: rise 1s cubic-bezier(.16,1,.3,1) forwards; }
+  .mask-line:nth-child(1) > span { animation-delay: .15s; }
+  .mask-line:nth-child(2) > span { animation-delay: .28s; }
+  .mask-line:nth-child(3) > span { animation-delay: .41s; }
+  .mask-line:nth-child(4) > span { animation-delay: .54s; }
+  @keyframes rise { to { transform: translateY(0); } }
+  .molten { color: var(--molten); }
+  .hero-sub { margin-top: 26px; font-size: 17px; color: var(--ink2); max-width: 34rem; line-height: 1.7; }
+  .hero-cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 16px; }
+  .stats { margin-top: 46px; display: flex; gap: 38px; }
+  .stats .num { font-family: "Syne", sans-serif; font-weight: 800; font-size: 34px; }
+  .stats .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); margin-top: 4px; max-width: 150px; }
+  .stats .div { width: 1px; background: var(--hairline); }
+
+  .frame { position: relative; overflow: hidden; border: 1px solid var(--hairline); }
+  .frame .ph { height: 66vh; min-height: 380px; overflow: hidden; }
+  @media (max-width: 860px) { .frame .ph { height: 46vh; } }
+  .frame img { width: 100%; height: 120%; object-fit: cover; will-change: transform; }
+  .frame .cap {
+    position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between;
+    padding: 12px 16px; background: linear-gradient(to top, rgba(20,20,19,.7), transparent);
+  }
+  .frame .cap span { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: rgba(251,249,245,.85); }
+  .frame .cap .warn { color: var(--molten); }
+  .spotlight::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; --mx: 50%; --my: 50%;
+    background: radial-gradient(340px circle at var(--mx) var(--my), rgba(217,90,43,.18), transparent 65%);
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee { border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); background: rgba(243,240,234,.6); padding: 20px 0; overflow: hidden; }
+  .marquee-track { display: flex; width: max-content; animation: marquee 46s linear infinite; }
+  .marquee-track > .mrow { display: flex; align-items: center; flex-shrink: 0; }
+  .marquee-track .mitem { display: flex; align-items: center; flex-shrink: 0; }
+  .marquee-track .mtext { font-family: "Syne", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -.01em; color: rgba(20,20,19,.85); padding: 0 24px; white-space: nowrap; }
+  .marquee-track .mdot { width: 8px; height: 8px; border-radius: 50%; background: var(--molten); flex-shrink: 0; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ============ JUDUL SECTION ============ */
+  section.block { padding: 96px 0; }
+  @media (max-width: 860px) { section.block { padding: 72px 0; } }
+  .sec-head { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+  .sec-head .idx { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .2em; color: var(--molten); }
+  .sec-head .rule { height: 1px; flex: 1; background: var(--hairline); }
+  .sec-head h2 { font-family: "Syne", sans-serif; font-weight: 700; letter-spacing: -.02em; font-size: clamp(24px, 3vw, 36px); }
+
+  /* ============ TENTANG ============ */
+  .about-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; align-items: start; }
+  .about-text { grid-column: span 6; }
+  .about-photo { grid-column: span 6; }
+  @media (max-width: 860px) { .about-text, .about-photo { grid-column: span 12; } }
+  .lead { font-size: 20px; line-height: 1.6; font-weight: 500; }
+  .para { margin-top: 22px; font-size: 16px; color: var(--ink2); line-height: 1.75; }
+  .about-photo .frame img { height: 380px; transition: transform .7s ease; }
+  .about-photo .frame:hover img { transform: scale(1.04); }
+  .tag-photo {
+    position: absolute; top: 12px; left: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; background: rgba(251,249,245,.92); color: var(--ink); padding: 6px 10px;
+  }
+  .isp-card { margin-top: 64px; background: var(--dark); color: var(--paper); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+  @media (max-width: 860px) { .isp-card { grid-template-columns: 1fr; } }
+  .isp-body { padding: 48px; }
+  @media (max-width: 860px) { .isp-body { padding: 28px; } }
+  .isp-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(217,90,43,.4); background: rgba(217,90,43,.15); margin-bottom: 22px; }
+  .isp-badge span { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--molten); }
+  .isp-card h3 { font-family: "Syne", sans-serif; font-weight: 700; letter-spacing: -.01em; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.3; }
+  .isp-card p { margin-top: 18px; color: rgba(251,249,245,.7); line-height: 1.75; font-size: 16px; }
+  .isp-img { position: relative; min-height: 260px; }
+  .isp-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .isp-img::after { content: ""; position: absolute; inset: 0; background: rgba(26,26,24,.2); }
+
+  /* ============ PENGALAMAN ============ */
+  #pengalaman { background: rgba(243,240,234,.5); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .job { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 44px 16px; margin: 0 -16px; border-top: 1px solid var(--hairline); transition: background .3s; }
+  .job:last-child { border-bottom: 1px solid var(--hairline); }
+  .job:hover { background: rgba(251,249,245,.85); }
+  @media (min-width: 861px) { .job { padding: 48px 16px; gap: 32px; } }
+  .job h3 { grid-column: span 5; font-family: "Syne", sans-serif; font-weight: 700; letter-spacing: -.01em; font-size: clamp(22px, 2.4vw, 30px); transition: color .3s; }
+  .job:hover h3 { color: var(--molten); }
+  .job .meta { grid-column: span 3; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--molten); }
+  .job .desc { grid-column: span 4; color: var(--ink2); line-height: 1.7; font-size: 15px; }
+  @media (max-width: 860px) { .job h3, .job .meta, .job .desc { grid-column: span 12; } }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tags span { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--hairline); background: var(--paper); color: var(--ink2); padding: 5px 10px; }
+
+  /* ============ KEAHLIAN (BENTO) ============ */
+  .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bcard { height: 100%; border: 1px solid var(--hairline); background: #fff; padding: 30px; transition: border-color .3s, box-shadow .3s; }
+  .bcard:hover { border-color: rgba(217,90,43,.5); box-shadow: 0 12px 40px -18px rgba(217,90,43,.35); }
+  @media (min-width: 861px) {
+    .b-wide { grid-column: span 2; }
+    .b-full { grid-column: span 3; }
+  }
+  .bicon { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--hairline); display: flex; align-items: center; justify-content: center; margin-bottom: 22px; transition: border-color .3s, background .3s; }
+  .bcard:hover .bicon { border-color: var(--molten); background: rgba(217,90,43,.1); }
+  .bicon svg { color: var(--molten); }
+  .bcard h3 { font-family: "Syne", sans-serif; font-weight: 700; font-size: 19px; }
+  .bcard p { margin-top: 12px; color: var(--ink2); font-size: 15px; line-height: 1.65; }
+  .tools-title { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink3); margin-top: 48px; display: block; }
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .tools span { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--hairline); background: rgba(243,240,234,.7); color: var(--ink2); padding: 9px 16px; transition: border-color .3s, color .3s; cursor: default; }
+  .tools span:hover { border-color: var(--molten); color: var(--molten); }
+
+  /* ============ KONTAK ============ */
+  #kontak { background: rgba(243,240,234,.5); border-top: 1px solid var(--hairline); }
+  .contact-title { font-family: "Syne", sans-serif; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(2.2rem, 6vw, 4.2rem); max-width: 48rem; }
+  .contact-sub { margin-top: 22px; color: var(--ink2); font-size: 17px; max-width: 36rem; line-height: 1.7; }
+  .contact-grid { margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 48rem; }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+  .ccard { border: 1px solid var(--hairline); background: #fff; padding: 28px; display: flex; justify-content: space-between; gap: 16px; }
+  .ccard .clabel { display: flex; align-items: center; gap: 8px; color: var(--ink3); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .ccard .cval { margin-top: 12px; font-family: "JetBrains Mono", monospace; font-size: 15px; word-break: break-all; }
+  .ccard .clink { display: inline-block; margin-top: 16px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--molten); transition: color .3s; }
+  .ccard .clink:hover { color: var(--molten2); }
+  .copy-btn { flex-shrink: 0; align-self: flex-start; padding: 10px; border: 1px solid var(--hairline); border-radius: 50%; background: none; color: var(--ink2); cursor: pointer; transition: border-color .3s, color .3s; }
+  .copy-btn:hover { border-color: var(--molten); color: var(--molten); }
+
+  /* ============ FOOTER ============ */
+  footer { background: var(--dark); color: var(--paper); }
+  footer .inner { padding: 56px 0; }
+  footer .big { margin-top: 22px; font-family: "Syne", sans-serif; font-weight: 700; letter-spacing: -.01em; font-size: clamp(28px, 4.4vw, 48px); line-height: 1.15; max-width: 32rem; }
+  .foot-bottom { margin-top: 52px; padding-top: 24px; border-top: 1px solid rgba(251,249,245,.15); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(251,249,245,.45); }
+  .top-btn { display: inline-flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper); border: 1px solid rgba(251,249,245,.25); border-radius: 999px; padding: 12px 20px; background: none; cursor: pointer; transition: border-color .3s, color .3s; }
+  .top-btn:hover { border-color: var(--molten); color: var(--molten); }
+
+  /* ============ ANIMASI SCROLL ============ */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ============ TOAST (notifikasi kecil) ============ */
+  #toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 70;
+    background: var(--ink); color: var(--paper); font-size: 14px; padding: 12px 20px; border-radius: 10px;
+    opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s;
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+</style>
+</head>
+<body class="grain">
+
+<!-- ============ NAVIGASI ============ -->
+<header>
+  <nav class="wrap nav">
+    <a class="brand" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#top" data-testid="logo-link">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="7" cy="16" r="3.4" fill="#D95A2B"></circle>
+        <path d="M13.4 16H26" stroke="#141413" stroke-width="2.6" stroke-linecap="round"></path>
+        <path d="M13 12.2 L25 7.6" stroke="#141413" stroke-width="2.6" stroke-linecap="round"></path>
+        <path d="M13 19.8 L25 24.4" stroke="#141413" stroke-width="2.6" stroke-linecap="round"></path>
+      </svg>
+      <!-- GANTI DI SINI: nama Anda -->
+      Muhammad Sultan Imam
+    </a>
+    <div class="nav-links">
+      <a class="nav-item" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#tentang" data-testid="nav-link-tentang">Tentang</a>
+      <a class="nav-item" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#pengalaman" data-testid="nav-link-pengalaman">Pengalaman</a>
+      <a class="nav-item" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#keahlian" data-testid="nav-link-keahlian">Keahlian</a>
+      <a class="nav-item" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#kontak" data-testid="nav-link-kontak">Kontak</a>
+      <a class="btn-molten" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#kontak" data-testid="nav-cta-contact">Hubungi Saya</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu" data-testid="nav-mobile-toggle">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+    </button>
+  </nav>
+  <div class="drawer" id="drawer" data-testid="nav-mobile-drawer">
+    <div class="wrap">
+      <a href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#tentang">Tentang</a>
+      <a href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#pengalaman">Pengalaman</a>
+      <a href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#keahlian">Keahlian</a>
+      <a href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#kontak">Kontak</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-left">
+        <div class="chip" data-testid="hero-name-chip">
+          <span class="dot"></span>
+          <!-- GANTI DI SINI: nama + gelar Anda -->
+          <span>Muhammad Sultan Imam — Operator Metalizer &amp; Kontributor ISP Desa</span>
         </div>
-        <div class="meta-row">
-          <div><strong>Metalizing</strong><span>Bidang pekerjaan</span></div>
-          <div><strong>ISP Desa</strong><span>Pengalaman proyek</span></div>
-          <div><strong>Manufacturing</strong><span>Lingkungan kerja</span></div>
+        <h1 class="hero-title">
+          <span class="mask-line"><span>Tujuh tahun</span></span>
+          <span class="mask-line"><span>menyemprot</span></span>
+          <span class="mask-line"><span class="molten">logam cair,</span></span>
+          <span class="mask-line"><span>lapis demi lapis.</span></span>
+        </h1>
+        <p class="hero-sub">
+          Saya melapisi baja dengan zinc &amp; aluminium agar tahan korosi
+          bertahun-tahun — dan ikut membantu membangun jaringan internet
+          untuk desa saya.
+        </p>
+        <div class="hero-cta">
+          <a class="btn-molten" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#pengalaman" data-testid="hero-cta-experience" style="text-transform:uppercase;">Lihat Pengalaman ↓</a>
+          <a class="btn-ghost" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#kontak" data-testid="hero-cta-contact">Hubungi Saya</a>
+        </div>
+        <div class="stats" data-testid="hero-stats">
+          <div>
+            <div class="num">07</div>
+            <div class="lbl">Tahun Operator Metalizer</div>
+          </div>
+          <div class="div"></div>
+          <div>
+            <div class="num molten">01</div>
+            <div class="lbl">Proyek ISP Desa yang dibantu</div>
+          </div>
         </div>
       </div>
-    </section>
+      <div class="hero-right">
+        <!-- GANTI DI SINI: foto kerja Anda (taruh file foto di folder yang sama, contoh src="foto-hero.jpg") -->
+        <div class="frame spotlight" data-testid="hero-image-frame" style="--mx: 5.074951171875px; --my: 92px;">
+          <div class="ph">
+            <img id="heroImg" src="./Muhammad Sultan Imam — Operator Metalizer &amp; ISP Desa_files/photo-1714504904786-b6732390b206" alt="Proses pengelasan dan spray logam dengan percikan api" data-testid="hero-image">
+          </div>
+          <div class="cap">
+            <span>Foto Kerja — Placeholder</span>
+            <span class="warn">Ganti Nanti</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="page" id="about">
-      <div class="section-head">
-        <div><span class="eyebrow">Tentang saya</span><h2>Berpengalaman di lapangan,<br><span class="gradient">terbuka pada hal baru.</span></h2></div>
-        <p>Saya memiliki pengalaman di lingkungan manufaktur sebagai operator mesin metalize serta pernah membantu proyek penyediaan layanan internet di desa. Dua pengalaman ini membentuk ketertarikan saya pada proses operasional, pemecahan masalah, dan infrastruktur teknologi.</p>
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" data-testid="marquee-track">
+      <div class="mrow">
+        <span class="mitem"><span class="mtext">THERMAL SPRAY COATING</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">ZINC &amp; ALUMINIUM SPRAY</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">ANTI-KOROSI</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">7 TAHUN OPERATOR METALIZER</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">ISP DESA</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">SURFACE PROTECTION</span><span class="mdot"></span></span>
+      </div>
+      <div class="mrow">
+        <span class="mitem"><span class="mtext">THERMAL SPRAY COATING</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">ZINC &amp; ALUMINIUM SPRAY</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">ANTI-KOROSI</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">7 TAHUN OPERATOR METALIZER</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">ISP DESA</span><span class="mdot"></span></span>
+        <span class="mitem"><span class="mtext">SURFACE PROTECTION</span><span class="mdot"></span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TENTANG ============ -->
+  <section class="block" id="tentang">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="idx">01</span><span class="rule"></span><h2>Tentang Saya</h2><span class="rule"></span>
       </div>
       <div class="about-grid">
-        <article class="card about-copy">
-          <h3>Profil profesional</h3>
-          <p>Saya bekerja sebagai operator mesin vacuum metalizer di lingkungan manufaktur. Dalam pekerjaan, saya berfokus menjalankan tugas operasional mesin sesuai prosedur kerja, memperhatikan kondisi proses, serta menjaga komunikasi dan koordinasi di area produksi.</p>
-          <p>Di luar pekerjaan utama, saya pernah terlibat membantu proyek Internet Service Provider (ISP) di desa. Pengalaman tersebut menambah wawasan saya mengenai kebutuhan konektivitas dan pekerjaan teknis di lapangan.</p>
-          <div class="skill-list">
-            <span>Operasional Mesin</span><span>Metalizing</span><span>Produksi Manufaktur</span><span>ISP</span><span>Jaringan Komputer</span><span>MikroTik</span><span>Problem Solving</span>
+        <div class="about-text reveal">
+          <p class="lead">
+            Selama 7 tahun saya bekerja sebagai operator metalizer —
+            menyemprotkan logam cair seperti zinc dan aluminium ke permukaan
+            baja, sehingga besi dan konstruksi logam tahan karat jauh lebih
+            lama.
+          </p>
+          <p class="para">
+            Pekerjaan ini menuntut ketelitian: persiapan permukaan harus
+            bersih, suhu dan arah semprot harus konsisten, dan hasil lapisan
+            diukur satu per satu. Dari kebiasaan bekerja presisi itulah saya
+            terbiasa menyelesaikan sesuatu dengan serius — termasuk proyek
+            besar di desa saya.
+          </p>
+          <p class="para">
+            Di luar pekerjaan, saya bangga bisa ikut membantu membangun
+            jaringan internet desa, agar warga dapat akses internet yang lebih
+            baik.
+          </p>
+        </div>
+        <div class="about-photo reveal">
+          <!-- GANTI DI SINI: foto profil/kerja Anda (contoh src="foto-saya.jpg") -->
+          <div class="frame spotlight" data-testid="about-image-frame">
+            <img src="./Muhammad Sultan Imam — Operator Metalizer &amp; ISP Desa_files/photo-1455165814004-1126a7199f9b" alt="Pekerja logam sedang menyemprotkan logam dengan percikan api" data-testid="about-image" style="height:380px; object-fit:cover; width:100%;">
+            <span class="tag-photo">Foto Anda di sini</span>
           </div>
-        </article>
-        <aside class="card about-copy">
-          <h3>Informasi</h3>
-          <div class="info-list">
-            <div class="info-item"><small>Pekerjaan saat ini</small><strong>Operator Mesin Metalize</strong></div>
-            <div class="info-item"><small>Lingkungan kerja</small><strong>Industri Manufaktur</strong></div>
-            <div class="info-item"><small>Pengalaman proyek</small><strong>Dukungan Proyek ISP Desa</strong></div>
-            <div class="info-item"><small>Pendidikan</small><strong>Tambahkan kampus / jurusan</strong></div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="page" id="projects">
-      <div class="section-head">
-        <div><span class="eyebrow">Experience & projects</span><h2>Pengalaman dan proyek<span class="gradient">.</span></h2></div>
-        <p>Pengalaman kerja dan keterlibatan proyek yang membentuk keterampilan operasional, teknis, dan kolaborasi.</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <div class="card-top"><div class="icon-box">⌁</div><span class="tag">IoT · Embedded</span></div>
-          <h3>Operator Mesin Vacuum Metalizer</h3>
-          <p>Pengalaman kerja di area produksi sebagai operator mesin metalize. Terbiasa bekerja dalam lingkungan manufaktur dengan perhatian pada prosedur operasional, kondisi mesin, dan koordinasi tim.</p>
-          <div class="tags"><span>Metalizing</span><span>Operasional Produksi</span><span>BOBST K4 Expert</span><span>Manufacturing</span></div>
-        </article>
-        <article class="card">
-          <div class="card-top"><div class="icon-box">◉</div><span class="tag">IoT · Monitoring</span></div>
-          <h3>Dukungan Proyek Internet Desa</h3>
-          <p>Pernah membantu proyek penyediaan layanan internet di desa. Pengalaman ini memberi gambaran tentang kebutuhan konektivitas masyarakat dan pelaksanaan pekerjaan ISP di lapangan.</p>
-          <div class="tags"><span>Internet Service Provider</span><span>Infrastruktur Jaringan</span><span>Field Support</span></div>
-        </article>
-        <article class="card">
-          <div class="card-top"><div class="icon-box">⌘</div><span class="tag">Networking</span></div>
-          <h3>Eksplorasi Jaringan & MikroTik</h3>
-          <p>Pembelajaran dan praktik konfigurasi jaringan komputer, termasuk pemahaman routing dan skenario dua koneksi ISP untuk kebutuhan konektivitas yang lebih stabil.</p>
-          <div class="tags"><span>MikroTik</span><span>Routing</span><span>Dual ISP</span><span>Network Basics</span></div>
-        </article>
-        <article class="card">
-          <div class="card-top"><div class="icon-box">▤</div><span class="tag">Web · Profile</span></div>
-          <h3>Pengembangan Portofolio Pribadi</h3>
-          <p>Website ini menjadi dokumentasi perjalanan profesional, pengalaman kerja, dan proyek yang pernah saya bantu maupun kembangkan.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Cloudflare Pages</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="page" id="contact">
-      <div class="card contact-panel">
-        <span class="eyebrow">Get in touch</span>
-        <h2>Mari terhubung<span class="gradient">.</span></h2>
-        <p class="lead">Untuk diskusi profesional, peluang kolaborasi, atau percakapan seputar manufaktur dan jaringan internet, silakan hubungi saya melalui kanal berikut.</p>
-        <div class="contact-links">
-          <a class="btn btn-primary" href="mailto:emailanda@example.com">✉ Email saya</a>
-          <a class="btn btn-ghost" href="https://github.com/username" target="_blank" rel="noopener">GitHub ↗</a>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/username/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <span>© <span id="year"></span> Muhammad Sultan Imam. Dibuat dengan semangat belajar.</span>
-      <span>aezakmi.my.id</span>
+      <div class="isp-card reveal" data-testid="isp-story-card">
+        <div class="isp-body">
+          <div class="isp-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D95A2B" stroke-width="2" stroke-linecap="round"><path d="M4.9 16.1C1 12.2 1 5.8 4.9 1.9"></path><path d="M7.8 4.7a6.14 6.14 0 0 0-.8 7.5"></path><circle cx="12" cy="12" r="2"></circle><path d="M16.2 7.8c2 2 2.26 5.11.8 7.47"></path><path d="M19.1 1.9a10 10 0 0 1 0 14.1"></path><path d="M21.2 21.2l-9.2-9.2"></path></svg>
+            <span>Sumber Kebanggaan</span>
+          </div>
+          <h3>Proyek ISP Desa — Membawa Internet ke Kampung Halaman</h3>
+          <p>
+            Saya ikut membantu membangun proyek ISP (penyedia layanan
+            internet) di desa saya — berdiri di menara, memasang perangkat,
+            dan menarik jaringan bersama warga — agar rumah-rumah di desa
+            akhirnya bisa terhubung internet.
+          </p>
+        </div>
+        <div class="isp-img">
+          <!-- GANTI DI SINI: foto menara/instalasi ISP Anda -->
+          <img src="./Muhammad Sultan Imam — Operator Metalizer &amp; ISP Desa_files/photo-1557174360-3f4f7c724501" alt="Menara antena jaringan internet desa" data-testid="isp-story-image">
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    const pages = [...document.querySelectorAll('.page')];
-    const navLinks = [...document.querySelectorAll('.nav-links a')];
-    const nav = document.getElementById('navLinks');
-    const menuBtn = document.getElementById('menuBtn');
+  <!-- ============ PENGALAMAN ============ -->
+  <section class="block" id="pengalaman">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="idx">02</span><span class="rule"></span><h2>Pengalaman</h2><span class="rule"></span>
+      </div>
+      <div data-testid="experience-list">
+        <div class="job reveal">
+          <h3>Operator Metalizer</h3>
+          <div class="meta">7 Tahun — Hingga Sekarang</div>
+          <div class="desc">
+            Mengoperasikan peralatan thermal spray untuk melapisi komponen dan
+            konstruksi logam dengan zinc &amp; aluminium: dari persiapan
+            permukaan, proses penyemprotan, sampai pemeriksaan hasil lapisan.
+            <div class="tags">
+              <span>Zinc Spray</span><span>Aluminium Spray</span><span>Grit Blasting</span><span>Inspeksi Lapisan</span>
+            </div>
+          </div>
+        </div>
+        <div class="job reveal">
+          <h3>Kontributor Proyek ISP Desa</h3>
+          <div class="meta">Proyek Komunitas</div>
+          <div class="desc">
+            Membantu membangun jaringan internet untuk desa saya bersama
+            warga setempat — sebuah proyek yang membuat kampung halaman saya
+            terhubung ke internet.
+            <div class="tags">
+              <span>Jaringan Desa</span><span>Kerja Sama Warga</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function showPage() {
-      const id = (location.hash || '#home').slice(1);
-      const target = pages.find(page => page.id === id) || pages[0];
+  <!-- ============ KEAHLIAN ============ -->
+  <section class="block" id="keahlian">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="idx">03</span><span class="rule"></span><h2>Keahlian &amp; Peralatan</h2><span class="rule"></span>
+      </div>
+      <div class="bento" data-testid="skills-bento">
+        <div class="bcard b-wide reveal" data-testid="skill-card-1">
+          <div class="bicon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg></div>
+          <h3>Thermal Spray / Metalizing</h3>
+          <p>Mengoperasikan pistol spray arc &amp; flame untuk melapisi logam dengan zinc dan aluminium cair — inti dari pekerjaan saya selama 7 tahun.</p>
+        </div>
+        <div class="bcard reveal" data-testid="skill-card-2">
+          <div class="bicon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4"></path><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path><path d="m8 6 2-2"></path><path d="m18 16 2-2"></path><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path><path d="M21.174 6.812a2.25 2.25 0 0 1-3.986-3.986L3.842 16.174a2.25 2.25 0 0 0 3.986 3.986z"></path></svg></div>
+          <h3>Persiapan Permukaan</h3>
+          <p>Pembersihan dan blasting permukaan baja sebelum proses coating.</p>
+        </div>
+        <div class="bcard reveal" data-testid="skill-card-3">
+          <div class="bicon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"></path><path d="m14.5 12.5 2-2"></path><path d="m11.5 9.5 2-2"></path><path d="m8.5 6.5 2-2"></path><path d="m17.5 15.5 2-2"></path></svg></div>
+          <h3>Pengukuran Ketebalan</h3>
+          <p>Memeriksa ketebalan lapisan agar hasil sesuai standar.</p>
+        </div>
+        <div class="bcard b-wide reveal" data-testid="skill-card-4">
+          <div class="bicon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M5 12.859a10 10 0 0 1 14 0"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path></svg></div>
+          <h3>Jaringan Dasar ISP</h3>
+          <p>Dasar-dasar pemasangan jaringan internet desa — dari kabel hingga antena — dari pengalaman proyek ISP desa saya.</p>
+        </div>
+        <div class="bcard b-full reveal" data-testid="skill-card-5">
+          <div class="bicon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+          <h3>K3 &amp; Keselamatan Kerja</h3>
+          <p>Terbiasa bekerja dengan APD lengkap dan prosedur aman di area spray.</p>
+        </div>
+      </div>
+      <span class="tools-title reveal">Peralatan yang biasa saya operasikan</span>
+      <div class="tools reveal" data-testid="tools-list">
+        <span>Arc Spray Gun</span><span>Flame Spray Gun</span><span>Grit Blaster</span><span>Thickness Gauge</span><span>Kompresor</span><span>Perangkat Jaringan &amp; Antena</span>
+      </div>
+    </div>
+  </section>
 
-      // Fade the outgoing page, then reveal the selected section.
-      const current = document.querySelector('.page.active');
-      if (current === target) return;
-      if (current) {
-        current.style.animation = 'none';
-        current.classList.remove('active');
+  <!-- ============ KONTAK ============ -->
+  <section class="block" id="kontak">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="idx">04</span><span class="rule"></span><h2>Kontak</h2><span class="rule"></span>
+      </div>
+      <div class="reveal">
+        <h3 class="contact-title">Mari <span class="molten">terhubung.</span></h3>
+        <p class="contact-sub">
+          Terbuka untuk peluang kerja, proyek coating, atau sekadar berbagi
+          cerita tentang metalizing dan internet desa.
+        </p>
+        <div class="contact-grid">
+          <div class="ccard" data-testid="contact-email-card">
+            <div>
+              <div class="clabel">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                Email
+              </div>
+              <!-- GANTI DI SINI: email Anda -->
+              <p class="cval">sultanimam2321@gmail.com</p>
+              <a class="clink" href="mailto:sultanimam2321@gmail.com" data-testid="contact-link-email">Kirim Email →</a>
+            </div>
+            <button class="copy-btn" id="copyEmail" aria-label="Salin email" data-testid="copy-email-button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+            </button>
+          </div>
+          <div class="ccard" data-testid="contact-whatsapp-card">
+            <div>
+              <div class="clabel">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>
+                WhatsApp
+              </div>
+              <!-- GANTI DI SINI: nomor WhatsApp Anda -->
+              <p class="cval">+62 812-3456-7890</p>
+              <a class="clink" href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" data-testid="contact-link-whatsapp">Chat WhatsApp →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap inner">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:40px;">
+      <div>
+        <a class="brand" href="https://metalizer-portfolio--9zwog9qc.preview.emergentagent.com/portfolio-standalone.html#top" style="color:var(--paper);" data-testid="logo-footer">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="7" cy="16" r="3.4" fill="#D95A2B"></circle>
+            <path d="M13.4 16H26" stroke="#FBF9F5" stroke-width="2.6" stroke-linecap="round"></path>
+            <path d="M13 12.2 L25 7.6" stroke="#FBF9F5" stroke-width="2.6" stroke-linecap="round"></path>
+            <path d="M13 19.8 L25 24.4" stroke="#FBF9F5" stroke-width="2.6" stroke-linecap="round"></path>
+          </svg>
+          Muhammad Sultan Imam
+        </a>
+        <p class="big">Operator Metalizer — <span class="molten">7 Tahun.</span><br>Pembangun ISP Desa.</p>
+      </div>
+      <button class="top-btn" id="topBtn" data-testid="back-to-top-button">Kembali ke Atas ↑</button>
+    </div>
+    <div class="foot-bottom" data-testid="footer-copyright">
+      <span>© <span id="year">2026</span> Muhammad Sultan Imam — Semua Hak Dilindungi</span>
+      <span>Dibuat dengan bangga di Indonesia</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status">Email disalin ke clipboard</div>
+
+<script>
+  // ====================== SCRIPT RINGKAS ======================
+  // Menu mobile
+  var menuBtn = document.getElementById("menuBtn");
+  var drawer = document.getElementById("drawer");
+  menuBtn.addEventListener("click", function () { drawer.classList.toggle("open"); });
+  drawer.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () { drawer.classList.remove("open"); });
+  });
+
+  // Animasi muncul saat di-scroll (reveal)
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       }
-      target.classList.add('active');
-      target.style.animation = 'none';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => target.style.animation = '');
-      });
-
-      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + target.id));
-      nav.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    window.addEventListener('hashchange', showPage);
-    navLinks.forEach(link => link.addEventListener('click', () => {
-      if (link.hash === location.hash) showPage();
-    }));
-    menuBtn.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', String(open));
     });
-    document.getElementById('year').textContent = new Date().getFullYear();
-    showPage();
-  </script>
-</body>
-</html>
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".reveal").forEach(function (el) { observer.observe(el); });
+
+  // Parallax halus pada foto hero
+  var heroImg = document.getElementById("heroImg");
+  window.addEventListener("scroll", function () {
+    var frame = heroImg.closest(".frame");
+    var r = frame.getBoundingClientRect();
+    var progress = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+    heroImg.style.transform = "translateY(" + ((0.5 - progress) * 20) + "%)";
+  }, { passive: true });
+
+  // Sorotan oranye mengikuti kursor pada bingkai foto
+  document.querySelectorAll(".spotlight").forEach(function (el) {
+    el.addEventListener("mousemove", function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      el.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+
+  // Tombol salin email + notifikasi
+  var toast = document.getElementById("toast");
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(function () { toast.classList.remove("show"); }, 2000);
+  }
+  document.getElementById("copyEmail").addEventListener("click", function () {
+    var email = "sultanimam2321@gmail.com"; // GANTI DI SINI: email Anda
+    function fallback() {
+      var t = document.createElement("textarea");
+      t.value = email; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); showToast("Email disalin ke clipboard"); }
+      catch (e) { showToast("Gagal menyalin email"); }
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(function () {
+        showToast("Email disalin ke clipboard");
+      }).catch(fallback);
+    } else { fallback(); }
+  });
+
+  // Tahun otomatis di footer + tombol kembali ke atas
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("topBtn").addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+<script type="module" src="./Muhammad Sultan Imam — Operator Metalizer &amp; ISP Desa_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;7f7b0fd8732c4326aae4b9d58d5c514a&quot;,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+</body></html>
