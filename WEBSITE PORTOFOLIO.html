@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="Portofolio profesional di bidang operasional mesin vacuum metalizer, manufaktur, dan proyek jaringan internet desa.">
+  <title>Portfolio — Muhammad Sultan Imam</title>
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --surface: #11151d;
+      --surface-2: #171d28;
+      --text: #f3f5f8;
+      --muted: #9aa5b5;
+      --line: rgba(255,255,255,.09);
+      --accent: #9bdbff;
+      --accent-2: #b5a4ff;
+      --radius: 22px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background: radial-gradient(ellipse at 80% 5%, rgba(115,135,255,.12), transparent 34%),
+                  radial-gradient(ellipse at 10% 40%, rgba(91,205,255,.07), transparent 32%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin-inline: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px);
+      background: rgba(11,13,18,.72); border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 1rem; font-weight: 800; letter-spacing: -.04em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      color: var(--muted); padding: 9px 13px; border-radius: 999px; font-size: .9rem;
+      transition: color .25s, background .25s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(255,255,255,.07); }
+    .menu-btn { display: none; border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 12px; padding: 9px 12px; }
+    main { min-height: 75vh; }
+    .page { display: none; padding: 86px 0 100px; animation: pageIn .55s cubic-bezier(.2,.75,.25,1) both; }
+    .page.active { display: block; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+    .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1,h2,h3,p { margin-top: 0; }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.7rem); line-height: 1.02; letter-spacing: -.07em; max-width: 850px; margin: 20px 0 24px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.055em; line-height: 1.1; margin: 12px 0 18px; }
+    h3 { letter-spacing: -.025em; margin-bottom: 9px; }
+    .gradient { background: linear-gradient(100deg, #f4f7fb 15%, #9bdbff 55%, #b5a4ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { max-width: 650px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.18rem); }
+    .hero { min-height: 65vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 13px 19px; font-weight: 700; font-size: .92rem; transition: transform .25s, background .25s, border-color .25s; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: #081019; background: var(--accent); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.025); }
+    .meta-row { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 58px; color: var(--muted); font-size: .88rem; }
+    .meta-row strong { display: block; color: var(--text); font-size: 1rem; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 25px; margin-bottom: 34px; }
+    .section-head p { max-width: 430px; color: var(--muted); margin-bottom: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .card { background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018)); border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; transition: transform .3s, border-color .3s, background .3s; }
+    .card:hover { transform: translateY(-5px); border-color: rgba(155,219,255,.35); background: linear-gradient(145deg, rgba(155,219,255,.08), rgba(255,255,255,.02)); }
+    .card-top { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 28px; }
+    .icon-box { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid var(--line); background: rgba(255,255,255,.04); border-radius: 14px; font-size: 1.2rem; }
+    .tag { color: var(--accent); background: rgba(155,219,255,.08); border: 1px solid rgba(155,219,255,.14); border-radius: 999px; padding: 5px 10px; font-size: .72rem; white-space: nowrap; }
+    .card p { color: var(--muted); margin-bottom: 18px; font-size: .94rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tags span { color: #b9c2d0; background: rgba(255,255,255,.055); padding: 5px 9px; border-radius: 7px; font-size: .75rem; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+    .about-copy { padding: 32px; }
+    .about-copy p { color: var(--muted); }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+    .skill-list span { border: 1px solid var(--line); padding: 9px 13px; border-radius: 999px; color: #d3d9e3; font-size: .85rem; }
+    .info-list { display: grid; gap: 0; }
+    .info-item { padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .info-item:last-child { border-bottom: 0; }
+    .info-item small { color: var(--muted); display: block; margin-bottom: 4px; }
+    .contact-panel { padding: clamp(28px, 6vw, 58px); text-align: center; }
+    .contact-panel .lead { margin-inline: auto; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    footer { border-top: 1px solid var(--line); padding: 26px 0; color: var(--muted); font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .muted { color: var(--muted); }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 32px, var(--max)); }
+      .nav { min-height: 68px; }
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 16px; right: 16px; padding: 10px; flex-direction: column; align-items: stretch; background: #141923; border: 1px solid var(--line); border-radius: 16px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 14px; }
+      .page { padding: 62px 0 76px; }
+      .hero { min-height: 68vh; }
+      .grid, .about-grid { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; }
+      .meta-row { margin-top: 40px; gap: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Beranda">PORTO<span>FOLIO.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Buka navigasi" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#home" class="active">Beranda</a>
+        <a href="#about">Tentang</a>
+        <a href="#projects">Proyek</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="page active" id="home">
+      <div class="hero">
+        <span class="eyebrow">Professional portfolio · 2026</span>
+        <h1>Menghubungkan <span class="gradient">operasional, teknologi, dan konektivitas.</span></h1>
+        <p class="lead">Halo, saya <strong>Muhammad Sultan Imam</strong>. Saat ini saya bekerja sebagai operator mesin metalize di industri manufaktur dan pernah berkontribusi dalam proyek pengembangan layanan internet untuk masyarakat desa.</p>
+        <div class="hero-bottom">
+          <a class="btn btn-primary" href="#projects">Lihat proyek <span>↗</span></a>
+          <a class="btn btn-ghost" href="#contact">Hubungi saya</a>
+        </div>
+        <div class="meta-row">
+          <div><strong>Metalizing</strong><span>Bidang pekerjaan</span></div>
+          <div><strong>ISP Desa</strong><span>Pengalaman proyek</span></div>
+          <div><strong>Manufacturing</strong><span>Lingkungan kerja</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="about">
+      <div class="section-head">
+        <div><span class="eyebrow">Tentang saya</span><h2>Berpengalaman di lapangan,<br><span class="gradient">terbuka pada hal baru.</span></h2></div>
+        <p>Saya memiliki pengalaman di lingkungan manufaktur sebagai operator mesin metalize serta pernah membantu proyek penyediaan layanan internet di desa. Dua pengalaman ini membentuk ketertarikan saya pada proses operasional, pemecahan masalah, dan infrastruktur teknologi.</p>
+      </div>
+      <div class="about-grid">
+        <article class="card about-copy">
+          <h3>Profil profesional</h3>
+          <p>Saya bekerja sebagai operator mesin vacuum metalizer di lingkungan manufaktur. Dalam pekerjaan, saya berfokus menjalankan tugas operasional mesin sesuai prosedur kerja, memperhatikan kondisi proses, serta menjaga komunikasi dan koordinasi di area produksi.</p>
+          <p>Di luar pekerjaan utama, saya pernah terlibat membantu proyek Internet Service Provider (ISP) di desa. Pengalaman tersebut menambah wawasan saya mengenai kebutuhan konektivitas dan pekerjaan teknis di lapangan.</p>
+          <div class="skill-list">
+            <span>Operasional Mesin</span><span>Metalizing</span><span>Produksi Manufaktur</span><span>ISP</span><span>Jaringan Komputer</span><span>MikroTik</span><span>Problem Solving</span>
+          </div>
+        </article>
+        <aside class="card about-copy">
+          <h3>Informasi</h3>
+          <div class="info-list">
+            <div class="info-item"><small>Pekerjaan saat ini</small><strong>Operator Mesin Metalize</strong></div>
+            <div class="info-item"><small>Lingkungan kerja</small><strong>Industri Manufaktur</strong></div>
+            <div class="info-item"><small>Pengalaman proyek</small><strong>Dukungan Proyek ISP Desa</strong></div>
+            <div class="info-item"><small>Pendidikan</small><strong>Tambahkan kampus / jurusan</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="projects">
+      <div class="section-head">
+        <div><span class="eyebrow">Experience & projects</span><h2>Pengalaman dan proyek<span class="gradient">.</span></h2></div>
+        <p>Pengalaman kerja dan keterlibatan proyek yang membentuk keterampilan operasional, teknis, dan kolaborasi.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top"><div class="icon-box">⌁</div><span class="tag">IoT · Embedded</span></div>
+          <h3>Operator Mesin Vacuum Metalizer</h3>
+          <p>Pengalaman kerja di area produksi sebagai operator mesin metalize. Terbiasa bekerja dalam lingkungan manufaktur dengan perhatian pada prosedur operasional, kondisi mesin, dan koordinasi tim.</p>
+          <div class="tags"><span>Metalizing</span><span>Operasional Produksi</span><span>BOBST K4 Expert</span><span>Manufacturing</span></div>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon-box">◉</div><span class="tag">IoT · Monitoring</span></div>
+          <h3>Dukungan Proyek Internet Desa</h3>
+          <p>Pernah membantu proyek penyediaan layanan internet di desa. Pengalaman ini memberi gambaran tentang kebutuhan konektivitas masyarakat dan pelaksanaan pekerjaan ISP di lapangan.</p>
+          <div class="tags"><span>Internet Service Provider</span><span>Infrastruktur Jaringan</span><span>Field Support</span></div>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon-box">⌘</div><span class="tag">Networking</span></div>
+          <h3>Eksplorasi Jaringan & MikroTik</h3>
+          <p>Pembelajaran dan praktik konfigurasi jaringan komputer, termasuk pemahaman routing dan skenario dua koneksi ISP untuk kebutuhan konektivitas yang lebih stabil.</p>
+          <div class="tags"><span>MikroTik</span><span>Routing</span><span>Dual ISP</span><span>Network Basics</span></div>
+        </article>
+        <article class="card">
+          <div class="card-top"><div class="icon-box">▤</div><span class="tag">Web · Profile</span></div>
+          <h3>Pengembangan Portofolio Pribadi</h3>
+          <p>Website ini menjadi dokumentasi perjalanan profesional, pengalaman kerja, dan proyek yang pernah saya bantu maupun kembangkan.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Cloudflare Pages</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="page" id="contact">
+      <div class="card contact-panel">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Mari terhubung<span class="gradient">.</span></h2>
+        <p class="lead">Untuk diskusi profesional, peluang kolaborasi, atau percakapan seputar manufaktur dan jaringan internet, silakan hubungi saya melalui kanal berikut.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:emailanda@example.com">✉ Email saya</a>
+          <a class="btn btn-ghost" href="https://github.com/username" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/username/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Muhammad Sultan Imam. Dibuat dengan semangat belajar.</span>
+      <span>aezakmi.my.id</span>
+    </div>
+  </footer>
+
+  <script>
+    const pages = [...document.querySelectorAll('.page')];
+    const navLinks = [...document.querySelectorAll('.nav-links a')];
+    const nav = document.getElementById('navLinks');
+    const menuBtn = document.getElementById('menuBtn');
+
+    function showPage() {
+      const id = (location.hash || '#home').slice(1);
+      const target = pages.find(page => page.id === id) || pages[0];
+
+      // Fade the outgoing page, then reveal the selected section.
+      const current = document.querySelector('.page.active');
+      if (current === target) return;
+      if (current) {
+        current.style.animation = 'none';
+        current.classList.remove('active');
+      }
+      target.classList.add('active');
+      target.style.animation = 'none';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => target.style.animation = '');
+      });
+
+      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + target.id));
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('hashchange', showPage);
+    navLinks.forEach(link => link.addEventListener('click', () => {
+      if (link.hash === location.hash) showPage();
+    }));
+    menuBtn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    showPage();
+  </script>
+</body>
+</html>
